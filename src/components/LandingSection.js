@@ -18,12 +18,22 @@ const LandingSection = () => (
     {/* The UI for the landing section */}
     <VStack spacing={16}>
       <VStack spacing={4}>
-        <Avatar src="https://i.pravatar.cc/150?img=5" size="2xl" name="Yivv" />
-        <Heading as="h4" size="md" noOfLines={1}>{greeting}</Heading>
+        <Avatar 
+          src="https://i.pravatar.cc/150?img=5" 
+          size="2xl" 
+          name="Yivv" 
+        />
+        <Heading as="h4" size="md" noOfLines={1}>
+          {greeting}
+        </Heading>
       </VStack>
       <VStack spacing={6}>
-        <Heading as="h1" size="2xl" noOfLines={1}>{bio1}</Heading>
-        <Heading as="h1" size="2xl" noOfLines={1}>{bio2}</Heading>
+        <Heading as="h1" size="2xl" noOfLines={1}>
+          {bio1}
+        </Heading>
+        <Heading as="h1" size="2xl" noOfLines={1}>
+          {bio2}
+        </Heading>
       </VStack>
     </VStack>
 

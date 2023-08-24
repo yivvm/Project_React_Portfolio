@@ -17,6 +17,9 @@ import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import {useAlertContext} from "../context/alertContext";
 
+/** 
+* Covers a complete form implementation using formik and yup for validation 
+*/ 
 const ContactMeSection = () => {  // ori: LandingSection
   const {isLoading, response, submit} = useSubmit();
   const { onOpen } = useAlertContext();
@@ -26,17 +29,19 @@ const ContactMeSection = () => {  // ori: LandingSection
     initialValues: {
       firstName: "",
       email: "",
-      type: "",
+      type: "hireme",
       comment: "",
     },
     onSubmit: (values) => {
-      submit("", values);
+      submit("https://example.com/contactme", values);
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
       email: Yup.string().email("Invalud email address").required("Requied"),
       // type: 
-      comment: Yup.string().min(25, "Must be at least 25 characters").required("Required")
+      comment: Yup.string()
+        .min(25, "Must be at least 25 characters")
+        .required("Required")
     }),
   });
 
@@ -44,9 +49,10 @@ const ContactMeSection = () => {  // ori: LandingSection
   useEffect(() => {
     if (response) {
       onOpen(response.type, response.message);
-      // Reset the form if the response is successful
-      if (response.type === "success")
+      // Reset the form if the response is successful.
+      if (response.type === "success") {
         formik.resetForm();
+      }
     }
   }, [response])
 
@@ -62,9 +68,11 @@ const ContactMeSection = () => {  // ori: LandingSection
           Contact me
         </Heading>
         <Box p={6} rounded="md" w="100%">
+
           {/* connect the form onSubmit prop with Formik's handleSubmit function */}
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
+
               {/* show the error messages for the firstName field when the field is touched and the validation fails. */}
               <FormControl isInvalid={!!formik.errors.firstName && formik.touched.firstName}>
                 <FormLabel htmlFor="firstName">Name</FormLabel>
@@ -112,7 +120,7 @@ const ContactMeSection = () => {  // ori: LandingSection
                   height={250}
                   {...formik.getFieldProps("comment")}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
 
               {/* show a loading indicator */}

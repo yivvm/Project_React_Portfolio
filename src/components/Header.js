@@ -53,19 +53,20 @@ const Header = () => {
     
     // handle scroll events.
     const handleScroll = () => {
-      const currScrollPos = window.scrollY;
-      const currHeaderElement = headerRef.current;
+      const currentScrollPos = window.scrollY;
+      const headerElement = headerRef.current;
 
-      if (!currHeaderElement)
+      if (!headerElement) {
         return;
-
-      if (prevScrollPos > currScrollPos)
-        currHeaderElement.style.transform = "translateY(0)";
-      else
-        currHeaderElement.style.transform = "translateY(-200px)";
-
-      prevScrollPos = currScrollPos;
+      }
+      if (prevScrollPos > currentScrollPos) {
+        headerElement.style.transform = "translateY(0)";
+      } else {
+        headerElement.style.transform = "translateY(-200px)";
+      }
+      prevScrollPos = currentScrollPos;
     };
+    window.addEventListener('scroll', handleScroll)  // hide the header while scrolling down. 
 
     // set up listeners for the scroll event.
     return () => {
@@ -97,7 +98,13 @@ const Header = () => {
             {/* Add external social media links based on the `socials` data */}
             <HStack spacing={10}>
               {socials.map(({icon, url}) => (
-                <a key={url} href={url} icon={icon} target="_blank" rel="noopener noreferrer">
+                <a 
+                  key={url} 
+                  href={url} 
+                  icon={icon} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
                   <FontAwesomeIcon key={url} icon={icon} size="2x" />
                 </a>
               ))}
@@ -106,8 +113,12 @@ const Header = () => {
           <nav>
             <HStack spacing={8}>
               {/* Add internal links to Projects and Contact me section */}
-              <a href="#projects" onClick={handleClick("projects")}>Projects</a>
-              <a href="/#contact-me" onClick={handleClick("contactme")}>Contact Me</a>
+              <a href="#projects" onClick={handleClick("projects")}>
+                Projects
+              </a>
+              <a href="/#contact-me" onClick={handleClick("contactme")}>
+                Contact Me
+              </a>
             </HStack>
           </nav>
         </HStack>
