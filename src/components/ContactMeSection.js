@@ -29,7 +29,7 @@ const ContactMeSection = () => {  // ori: LandingSection
     initialValues: {
       firstName: "",
       email: "",
-      type: "hireme",
+      type: "hireMe",
       comment: "",
     },
     onSubmit: (values) => {
@@ -37,7 +37,7 @@ const ContactMeSection = () => {  // ori: LandingSection
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
-      email: Yup.string().email("Invalud email address").required("Requied"),
+      email: Yup.string().email("Invalid email address").required("Requied"),
       // type: 
       comment: Yup.string()
         .min(25, "Must be at least 25 characters")
@@ -54,7 +54,7 @@ const ContactMeSection = () => {  // ori: LandingSection
         formik.resetForm();
       }
     }
-  }, [response])
+  }, [response]);
 
   return (
     <FullScreenSection
@@ -124,7 +124,7 @@ const ContactMeSection = () => {  // ori: LandingSection
               </FormControl>
 
               {/* show a loading indicator */}
-              <Button type="submit" colorScheme="purple" width="full">
+              <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading}>
                 Submit
               </Button>
             </VStack>
